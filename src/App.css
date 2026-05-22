@@ -1,0 +1,339 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: blue;
+  --background: lightgrey;
+  --surface: white;
+  --text-primary: black;
+  --text-secondary: grey;
+  --border: darkgrey;
+  --error: red;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.app {
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Header */
+.app-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.app-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+/* Filters */
+.filters-container {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap; /* why */
+}
+
+.search-bar {
+  flex: 1;
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem 2.5rem 0.75rem 1rem;
+  font-size: 1rem;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.sport-filter {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.filter-label {
+  font-weight: 500;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.sport-select {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  cursor: pointer;
+}
+
+.sport-select:focus {
+  border-color: var(--primary);
+}
+
+/* League List */
+.league-list {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* League Item */
+.league-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.15s;
+  gap: 1.5rem;
+}
+
+.league-item:last-child {
+  border-bottom: none;
+}
+
+.league-item:hover {
+  background: var(--background);
+}
+
+.league-item:focus {
+  border: 2px solid var(--primary);
+}
+
+.league-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.league-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.league-alternate {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sport-badge {
+  background: var(--primary);
+  color: white;
+  padding: 0.375rem 0.875rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.click-hint {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  flex-shrink: 0;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 2rem;
+  max-width: 500px;
+  width: 80%;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+
+.modal-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  padding-right: 2rem;
+}
+
+.modal-sport {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+
+.badge-container {
+  text-align: center;
+}
+
+.season-badge {
+  max-width: 100%;
+  height: auto;
+  max-height: 300px;
+  border-radius: 8px;
+}
+
+.badge-season {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.modal-loading,
+.no-badge {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--text-secondary);
+}
+
+/* Loading & Error States */
+.loading,
+.error,
+.no-results {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.error {
+  color: var(--error);
+}
+
+.error button {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .app {
+    padding: 1rem;
+  }
+
+  .app-header h1 {
+    font-size: 2rem;
+  }
+
+  .filters-container {
+    flex-direction: column;
+  }
+
+  .search-bar,
+  .sport-filter {
+    width: 100%;
+  }
+
+  .sport-filter {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .sport-select {
+    width: 100%;
+  }
+
+  .league-item {
+    gap: 0.75rem;
+  }
+
+  .modal-content {
+    padding: 1.5rem;
+  }
+
+  .modal-title {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-header h1 {
+    font-size: 1.75rem;
+  }
+
+  .sport-badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.625rem;
+  }
+
+  .league-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+
+  .league-info {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+  }
+
+  .click-hint {
+    display: none;
+  }
+
+  .sport-badge {
+    grid-column: 1 / 2;
+    grid-row: 2 / 2;
+    justify-self: start;
+  }
+}

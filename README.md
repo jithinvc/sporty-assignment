@@ -103,6 +103,8 @@ npm run build
 
 ---
 
+The Project is tested and verified on node 22, hence it is requested to use the same node version for further testing and verification
+
 ## Project Structure
 
 ```

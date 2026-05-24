@@ -67,6 +67,12 @@ export const fetchSeasonBadges = async (leagueId: string): Promise<SeasonBadge |
   }
 };
 
+export const getCachedBadge = (leagueId: string): SeasonBadge | null | undefined => {
+  const cacheKey = `badges_${leagueId}`;
+  if (!badgeCache.has(cacheKey)) return undefined;
+  return badgeCache.get(cacheKey) ?? null;
+};
+
 export const prefetchSeasonBadges = async (
   leagueId: string
 ): Promise<SeasonBadge | null> => {

@@ -27,25 +27,23 @@ const SeasonBadgeModal: React.FC<SeasonBadgeModalProps> = ({
         <h2 className="modal-title">{league.strLeague}</h2>
         <p className="modal-sport">{league.strSport}</p>
         
-        {!badge ? (
-          <div className="modal-loading">
-            <p>Loading badge...</p>
-          </div>
-        ) : badge?.strBadge ? (
-          <div className="badge-container">
-            <img 
-              src={badge.strBadge} 
+        <div className="badge-area">
+          {!badge ? (
+            <p className="badge-loading-text">Loading...</p>
+          ) : badge.strBadge ? (
+            <img
+              src={badge.strBadge}
               className="season-badge"
+              alt={`${league.strLeague} badge`}
             />
-            {badge.strSeason && (
-              <p className="badge-season">Season: {badge.strSeason}</p>
-            )}
-          </div>
-        ) : (
-          <div className="no-badge">
-            <p>No season badge available for this league.</p>
-          </div>
-        )}
+          ) : (
+            <p className="no-badge-text">No season badge available for this league.</p>
+          )}
+        </div>
+
+        <p className="badge-season">
+          {badge?.strSeason ? `Season: ${badge.strSeason}` : ''}
+        </p>
       </div>
     </div>
   );

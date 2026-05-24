@@ -4,9 +4,10 @@ import SearchBar from './components/SearchBar';
 import SportFilter from './components/SportFilter';
 import { useDebounce } from './hooks/useDebounce';
 import { 
-  fetchAllLeagues, 
-  fetchSeasonBadges, 
+  fetchAllLeagues,
+  fetchSeasonBadges,
   prefetchSeasonBadges,
+  getCachedBadge,
 } from './services/leagueService';
 import {
   getUniqueSports,
@@ -79,17 +80,21 @@ const App: React.FC = () => {
   }, [modalPrefetched]);
 
   const handleLeagueClick = useCallback(async (league: League): Promise<void> => {
-    setSelectedLeague(league);
+    const cached = getCachedBadge(league.idLeague);
 
-    // Fetch badge data if not cached
+    // Open modal in same render as badge if already cached — no loading flash
+    setSelectedLeague(league);
+    if (cached !== undefined) {
+      setCurrentBadge(cached);
+      return;
+    }
+
     try {
       const badgeToDisplay = await fetchSeasonBadges(league.idLeague);
-      
-       if (badgeToDisplay?.strBadge) {
+      if (badgeToDisplay?.strBadge) {
         const img = new Image();
-        img.src = badgeToDisplay.strBadge; // Preload badge image for modal
+        img.src = badgeToDisplay.strBadge;
       }
-      
       setCurrentBadge(badgeToDisplay);
     } catch (err) {
       console.error('Error fetching badges:', err);
@@ -154,9 +159,12 @@ const App: React.FC = () => {
       <Suspense fallback={
         <div className="modal-overlay">
           <div className="modal-content">
-            <div className="modal-loading">
-              <p>Loading...</p>
+            <h2 className="modal-title">{selectedLeague.strLeague}</h2>
+            <p className="modal-sport">{selectedLeague.strSport}</p>
+            <div className="badge-area">
+              <p className="badge-loading-text">Loading...</p>
             </div>
+            <p className="badge-season">season loading</p>
           </div>
         </div>
       }>

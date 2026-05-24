@@ -215,29 +215,42 @@ body {
   margin-bottom: 2rem;
 }
 
-.badge-container {
-  text-align: center;
+.badge-area {
+  height: 280px;
+  max-height: 280px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.badge-loading-text {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
 }
 
 .season-badge {
   max-width: 100%;
-  height: auto;
-  max-height: 300px;
-  border-radius: 8px;
+  height: 100%;
+  object-fit: contain;
+}
+
+.no-badge-text {
+  color: var(--text-secondary);
+  text-align: center;
+  font-size: 0.95rem;
 }
 
 .badge-season {
   margin-top: 1rem;
   font-size: 1.1rem;
+  line-height: 1.6;
+  min-height: calc(1.1rem * 1.6);
   font-weight: 500;
   color: var(--text-primary);
-}
-
-.modal-loading,
-.no-badge {
   text-align: center;
-  padding: 3rem 1rem;
-  color: var(--text-secondary);
 }
 
 /* Loading & Error States */
@@ -302,6 +315,10 @@ body {
   .modal-title {
     font-size: 1.5rem;
   }
+
+  .badge-area {
+    max-height: 220px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -312,6 +329,10 @@ body {
   .sport-badge {
     font-size: 0.75rem;
     padding: 0.25rem 0.625rem;
+  }
+
+  .badge-area {
+    max-height: 180px;
   }
 
   .league-item {
